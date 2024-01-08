@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <sstream>
 
@@ -10,26 +10,26 @@ namespace miit::list
 	template<typename T> 
 	class List;
 	/**
-	* @brief Перегрузка оператора равно
-	* @param rha Первый аргумент для сравнения
-	* @param lha Второй аргумент для сравнения
-	* @return false если равны и true если н ет
+	* @brief РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° СЂР°РІРЅРѕ
+	* @param rha РџРµСЂРІС‹Р№ Р°СЂРіСѓРјРµРЅС‚ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ
+	* @param lha Р’С‚РѕСЂРѕР№ Р°СЂРіСѓРјРµРЅС‚ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ
+	* @return false РµСЃР»Рё СЂР°РІРЅС‹ Рё true РµСЃР»Рё РЅ РµС‚
 	*/
 	template<typename T>
 	bool operator==(const List<T>& rha, const List<T>& lha) noexcept;
 	
 	/**
-	* @brief Перегрузка оператора не равно
-	* @param rha Первый аргумент для сравнения
-	* @param lha Второй аргумент для сравнения
-	* @return true если равны и false если нет
+	* @brief РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РЅРµ СЂР°РІРЅРѕ
+	* @param rha РџРµСЂРІС‹Р№ Р°СЂРіСѓРјРµРЅС‚ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ
+	* @param lha Р’С‚РѕСЂРѕР№ Р°СЂРіСѓРјРµРЅС‚ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ
+	* @return true РµСЃР»Рё СЂР°РІРЅС‹ Рё false РµСЃР»Рё РЅРµС‚
 	*/
 	template<typename T>
 	bool operator!=(const List<T>& rha, const List<T>& lha) noexcept;
 	
 	/**
-	* @brief Перегрузка оператора вывода
-	* @return Поток вывода со списком
+	* @brief РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РІС‹РІРѕРґР°
+	* @return РџРѕС‚РѕРє РІС‹РІРѕРґР° СЃРѕ СЃРїРёСЃРєРѕРј
 	*/
 	template<typename T>
 	std::ostream& operator<<(std::ostream& os, List<T>& list) noexcept;
@@ -42,87 +42,98 @@ namespace miit::list
 	private:
 		Node<T>* head;
 		Node<T>* tail;
+		size_t size;
+
+		/**
+		* @brief РџРµСЂРµРјРµС‰Р°РµС‚ РїРѕР»СЏ РґРІСѓС… РѕР±РµРєС‚РѕРІ
+		* @param list РЎРїРёСЃРѕРє РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ
+		*/
+		void swap(List& list);
 
 	public:
 
 		/**
-		* @brief Создает объект типа List
+		* @brief РЎРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ С‚РёРїР° List
 		*/
 		List();
 
 		/**
-		* @brief Создает объект типа List по initializer_list'у
-		* @param list Список по которому будет создаваться список
+		* @brief РЎРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ С‚РёРїР° List РїРѕ initializer_list'Сѓ
+		* @param list РЎРїРёСЃРѕРє РїРѕ РєРѕС‚РѕСЂРѕРјСѓ Р±СѓРґРµС‚ СЃРѕР·РґР°РІР°С‚СЊСЃСЏ СЃРїРёСЃРѕРє
 		*/
 		List(std::initializer_list<T> list);
 
 		/**
-		* @brief Чистит память за объектом типа List
+		* @brief Р§РёСЃС‚РёС‚ РїР°РјСЏС‚СЊ Р·Р° РѕР±СЉРµРєС‚РѕРј С‚РёРїР° List
 		*/
 		~List();
 
-
 		/**
-		* @brief Перегрузка оператора копирования
-		* @param list Список для копирования
-		* @return Список скопированный с list
+		* @brief РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+		* @param list РЎРїРёСЃРѕРє РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+		* @return РЎРїРёСЃРѕРє СЃРєРѕРїРёСЂРѕРІР°РЅРЅС‹Р№ СЃ list
 		*/
 		List<T>& operator=(const List<T>& list);
 
 		/**
-		* @brief Перегрузка оператора перемещения
-		* @param list Список для мува
-		* @return Список после мува
+		* @brief РџРµСЂРµРіСЂСѓР·РєР° РѕРїРµСЂР°С‚РѕСЂР° РїРµСЂРµРјРµС‰РµРЅРёСЏ
+		* @param list РЎРїРёСЃРѕРє РґР»СЏ РјСѓРІР°
+		* @return РЎРїРёСЃРѕРє РїРѕСЃР»Рµ РјСѓРІР°
 		*/
 		List<T>& operator=(List<T>&& list) noexcept;
 
 		/**
-		* @brief Перегрузка конструктора копирования
-		* @param list Список для копирования
+		* @brief РџРµСЂРµРіСЂСѓР·РєР° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+		* @param list РЎРїРёСЃРѕРє РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 		*/
 		List(const List<T>& list);
 
 		/**
-		* @brief Перегрузка конструктора перемещения
-		* @param list Список для мува
+		* @brief РџРµСЂРµРіСЂСѓР·РєР° РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂР° РїРµСЂРµРјРµС‰РµРЅРёСЏ
+		* @param list РЎРїРёСЃРѕРє РґР»СЏ РјСѓРІР°
 		*/
 		List(List<T>&& list) noexcept;
 
-
 		/**
-		* @brief Удаление всех элементов списка
+		* @brief РЈРґР°Р»РµРЅРёРµ РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ СЃРїРёСЃРєР°
 		*/
 		void clear();
 
 		/**
-		* @brief Добавление элемента в начало списка
-		* @param value Элемент для добавления
+		* @brief Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РЅР°С‡Р°Р»Рѕ СЃРїРёСЃРєР°
+		* @param value Р­Р»РµРјРµРЅС‚ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ
 		*/
-		void push_forward(T value);
+		void push_forward(const T& value);
 
 		/**
-		* @brief Добавление элемента в конец списка
-		* @param value Элемент для добавления
+		* @brief Р”РѕР±Р°РІР»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РІ РєРѕРЅРµС† СЃРїРёСЃРєР°
+		* @param value Р­Р»РµРјРµРЅС‚ РґР»СЏ РґРѕР±Р°РІР»РµРЅРёСЏ
 		*/
-		void push_back(T value);
+		void push_back(const T& value);
 
 		/**
-		* @brief Удаление элемента с начала списка
+		* @brief РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СЃ РЅР°С‡Р°Р»Р° СЃРїРёСЃРєР°
 		*/
 		void pop_forward();
 
 		/**
-		* @brief Есть ли элементы в списке
-		* @return true - если список не пустой и false если он пустой
+		* @brief Р•СЃС‚СЊ Р»Рё СЌР»РµРјРµРЅС‚С‹ РІ СЃРїРёСЃРєРµ
+		* @return true - РµСЃР»Рё СЃРїРёСЃРѕРє РЅРµ РїСѓСЃС‚РѕР№ Рё false РµСЃР»Рё РѕРЅ РїСѓСЃС‚РѕР№
 		*/
 		bool has_elements() const;
 
 		/**
-		* @brief Превращение списка в строку
-		* @return Строка по списку
+		* @brief РџСЂРµРІСЂР°С‰РµРЅРёРµ СЃРїРёСЃРєР° РІ СЃС‚СЂРѕРєСѓ
+		* @return РЎС‚СЂРѕРєР° РїРѕ СЃРїРёСЃРєСѓ
 		*/
 		std::string to_string() const;
 
+		/**
+		* @brief РџРѕР»СѓС‡РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° СЃ 'РёРЅРґРµРєСЃРѕРј' РІ СЃРїРёСЃРєРµ
+		* @param index РќРѕРјРµСЂ СЌР»РµРјРµРЅС‚Р° РІ СЃРїРёСЃРєРµ РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р°
+		* @return Р—РЅР°С‡РµРЅРёРµ СЌР»РµРјРµРЅС‚ СЃРїРёСЃРєР°
+		*/
+		T get(size_t index) const;
 		
 	};
 
@@ -131,11 +142,11 @@ namespace miit::list
 	{
 	public:
 		/**
-		* @brief Создает объект типа Node
-		* @param value Значение ноды
-		* @param next_node Следующая нода
+		* @brief РЎРѕР·РґР°РµС‚ РѕР±СЉРµРєС‚ С‚РёРїР° Node
+		* @param value Р—РЅР°С‡РµРЅРёРµ РЅРѕРґС‹
+		* @param next_node РЎР»РµРґСѓСЋС‰Р°СЏ РЅРѕРґР°
 		*/
-		Node(T value, Node<T>* next_node);
+		Node(T value, Node<T>* next_node = nullptr);
 		T value;
 		Node<T>* next_node;
 	};
@@ -147,16 +158,24 @@ namespace miit::list
 	}
 
 	template<typename T>
+	inline void List<T>::swap(List& list)
+	{
+		std::swap(this->head, list.head);
+		std::swap(this->tail, list.tail);
+		std::exchange(this->size, list.size);
+	}
+
+	template<typename T>
 	inline List<T>::List()
-		:head(nullptr), tail(nullptr)
+		:head(nullptr), tail(nullptr), size(0)
 	{
 	}
 
 	template<typename T>
 	inline List<T>::List(std::initializer_list<T> list)
-		: head(nullptr), tail(nullptr)
+		: List()
 	{
-		for (auto value : list)
+		for (auto& value : list)
 		{
 			this->push_back(value);
 		}
@@ -174,8 +193,7 @@ namespace miit::list
 		if (*this != list) 
 		{
 			List temp{ list };
-			std::swap(temp.head, this->head);
-			std::swap(temp.tail, this->tail);
+			this->swap(temp);
 		}
 		return *this;
 	}
@@ -185,14 +203,14 @@ namespace miit::list
 	{
 		if (*this != list) 
 		{
-			*this = std::move(list);
+			this->swap(list);
 		}
 		return *this;
 	}
 
 	template<typename T>
 	inline List<T>::List(const List<T>& list)
-		:head(nullptr), tail(nullptr)
+		:List()
 	{
 		List temp{};
 		Node<T>* curr = list.head;
@@ -201,15 +219,14 @@ namespace miit::list
 			temp.push_back(curr->value);
 			curr = curr->next_node;
 		}
-		std::swap(temp.head, this->head);
-		std::swap(temp.tail, this->tail);
+		this->swap(temp);
 	}
 
 	template<typename T>
 	inline List<T>::List(List<T>&& list) noexcept
-		:head(nullptr), tail(nullptr)
+		:List()
 	{
-		*this = std::move(list);
+		this->swap(list);
 	}
 
 	template<typename T>
@@ -221,7 +238,7 @@ namespace miit::list
 		}
 	}
 	template<typename T>
-	inline void List<T>::push_forward(T value)
+	inline void List<T>::push_forward(const T& value)
 	{
 		Node<T>* next_head = new Node<T>(value, this->head);
 		this->head = next_head;
@@ -229,9 +246,10 @@ namespace miit::list
 		{
 			this->tail = next_head;
 		}
+		this->size++;
 	}
 	template<typename T>
-	inline void List<T>::push_back(T value)
+	inline void List<T>::push_back(const T& value)
 	{
 		Node<T>* next_tail = new Node<T>(value, nullptr);
 		if (this->has_elements())
@@ -244,6 +262,7 @@ namespace miit::list
 			this->tail = next_tail;
 			this->head = next_tail;
 		}
+		this->size++;
 	}
 
 	template<typename T>
@@ -256,6 +275,7 @@ namespace miit::list
 		Node<T>* next_head = this->head->next_node;
 		delete this->head;
 		this->head = next_head;
+		this->size--;
 	}
 
 	template<typename T>
@@ -276,6 +296,21 @@ namespace miit::list
 			curr = curr->next_node;
 		}
 		return buffer.str();
+	}
+
+	template<typename T>
+	inline T List<T>::get(size_t index) const
+	{
+		if (this->is_empty() || (index + 1) > this->size)
+		{
+			throw std::out_of_range("Wrong Index");
+		}
+		Node<T>* temp = this->head;
+		for (size_t i = 0; i < index; i++)
+		{
+			temp = temp->next;
+		}
+		return temp->value;
 	}
 
 	template<typename T>
